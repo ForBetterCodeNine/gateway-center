@@ -1,5 +1,7 @@
 package com.project.center.domain.manage.model.vo;
 
+import java.util.List;
+
 /**
  * 应用服务VO
  */
@@ -12,6 +14,8 @@ public class ApplicationSystemVO {
     private String systemType;
     /** 注册中心；zookeeper://127.0.0.1:2181*/
     private String systemRegistry;
+    /** 接口方法 */
+    private List<ApplicationInterfaceVO> interfaceList;
 
     public String getSystemId() {
         return systemId;
@@ -43,5 +47,13 @@ public class ApplicationSystemVO {
 
     public void setSystemRegistry(String systemRegistry) {
         this.systemRegistry = systemRegistry;
+    }
+
+    public List<ApplicationInterfaceVO> getInterfaceList() {
+        return interfaceList;
+    }
+
+    public void setInterfaceList(List<ApplicationInterfaceVO> interfaceList) {
+        this.interfaceList = interfaceList;
     }
 }

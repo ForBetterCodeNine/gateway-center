@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.project.center.ApiGatewayApplication;
 import com.project.center.application.IConfigManageService;
 import com.project.center.application.IRegisterManageService;
+import com.project.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.project.center.domain.manage.model.vo.GatewayServerVO;
 import com.project.center.domain.register.model.vo.ApplicationInterfaceMethodVO;
 import com.project.center.domain.register.model.vo.ApplicationInterfaceVO;
@@ -87,6 +88,13 @@ public class ApiTest {
         applicationInterfaceVO02.setHttpCommandType("POST");
         applicationInterfaceVO02.setAuth(1);
         registerManageService.registerApplicationInterfaceMethod(applicationInterfaceVO02);
+    }
+
+
+    @Test
+    public void test_queryApplicationSystemRichInfo(){
+        ApplicationSystemRichInfo result = configManageService.queryApplicationSystemRichInfo("api-gateway-g4");
+        logger.info("测试结果：{}", JSON.toJSONString(result));
     }
 
 }

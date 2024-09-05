@@ -1,5 +1,7 @@
 package com.project.center.domain.manage.model.vo;
 
+import java.util.List;
+
 /**
  * 应用接口VO
  */
@@ -12,6 +14,8 @@ public class ApplicationInterfaceVO {
     private String interfaceName;
     /** 接口版本 */
     private String interfaceVersion;
+    /** 方法接口 */
+    private List<ApplicationInterfaceMethodVO> methodList;
 
     public String getSystemId() {
         return systemId;
@@ -43,5 +47,13 @@ public class ApplicationInterfaceVO {
 
     public void setInterfaceVersion(String interfaceVersion) {
         this.interfaceVersion = interfaceVersion;
+    }
+
+    public List<ApplicationInterfaceMethodVO> getMethodList() {
+        return methodList;
+    }
+
+    public void setMethodList(List<ApplicationInterfaceMethodVO> methodList) {
+        this.methodList = methodList;
     }
 }

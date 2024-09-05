@@ -14,4 +14,28 @@ public class ApplicationSystemRichInfo {
 
     //系统列表
     private List<ApplicationSystemVO> applicationSystemVOList;
+
+    public ApplicationSystemRichInfo() {
+    }
+
+    public ApplicationSystemRichInfo(String gatewayId, List<ApplicationSystemVO> applicationSystemVOList) {
+        this.gatewayId = gatewayId;
+        this.applicationSystemVOList = applicationSystemVOList;
+    }
+
+    public String getGatewayId() {
+        return gatewayId;
+    }
+
+    public void setGatewayId(String gatewayId) {
+        this.gatewayId = gatewayId;
+    }
+
+    public List<ApplicationSystemVO> getApplicationSystemVOList() {
+        return applicationSystemVOList;
+    }
+
+    public void setApplicationSystemVOList(List<ApplicationSystemVO> applicationSystemVOList) {
+        this.applicationSystemVOList = applicationSystemVOList;
+    }
 }
