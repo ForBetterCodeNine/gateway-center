@@ -2,6 +2,7 @@ package com.project.center.interfaces;
 
 
 import com.project.center.application.IConfigManageService;
+import com.project.center.application.IMessageService;
 import com.project.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.project.center.domain.manage.model.vo.GatewayServerVO;
 import com.project.center.infrastructure.common.ResponseCode;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 网关配置管理；服务分组、网关注册、服务关联
@@ -20,6 +22,9 @@ import java.util.List;
 @RequestMapping("/wg/admin/config")
 public class GatewayConfigManage {
     private Logger logger = LoggerFactory.getLogger(GatewayConfigManage.class);
+
+    @Resource
+    private IMessageService messageService;
 
     @Resource
     private IConfigManageService configManageService;
@@ -61,6 +66,18 @@ public class GatewayConfigManage {
             return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), richInfo);
         }catch (Exception e) {
             logger.error("查询分配到网关下的待注册系统信息(系统、接口、方法)异常 gatewayId：{}", gatewayId, e);
+            return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), null);
+        }
+    }
+
+    @PostMapping(value = "queryRedisConfig", produces = "application/json;charset=utf-8")
+    public Result<Map<String, String>> queryRedisConfig() {
+        try {
+            logger.info("查询配置中心Redis配置信息");
+            Map<String, String> redisConfig = messageService.queryRedisConfig();
+            return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), redisConfig);
+        } catch (Exception e) {
+            logger.error("查询配置中心Redis配置信息失败", e);
             return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), null);
         }
     }

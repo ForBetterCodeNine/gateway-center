@@ -139,4 +139,9 @@ public class ConfigManageRepository implements IConfigManageRepository {
         }
         return applicationInterfaceMethodVOList;
     }
+
+    @Override
+    public String queryGatewayDistribution(String systemId) {
+        return gatewayDistributionDao.queryGatewayDistribution(systemId);
+    }
 }

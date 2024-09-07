@@ -8,4 +8,6 @@ import java.util.List;
 public interface IGatewayDistributionDao {
 
     List<String> queryGatewayDistributionSystemList();
+
+    String queryGatewayDistribution(String systemId);
 }

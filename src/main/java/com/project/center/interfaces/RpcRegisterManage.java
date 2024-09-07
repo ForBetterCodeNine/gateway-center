@@ -1,12 +1,15 @@
 package com.project.center.interfaces;
 
+import com.project.center.application.IMessageService;
 import com.project.center.application.IRegisterManageService;
+import com.project.center.domain.manage.service.ConfigManageService;
 import com.project.center.domain.register.model.vo.ApplicationInterfaceMethodVO;
 import com.project.center.domain.register.model.vo.ApplicationInterfaceVO;
 import com.project.center.domain.register.model.vo.ApplicationSystemVO;
 import com.project.center.domain.register.repository.IRegisterManageRepository;
 import com.project.center.infrastructure.common.ResponseCode;
 import com.project.center.infrastructure.common.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,10 @@ public class RpcRegisterManage {
 
     @Resource
     private IRegisterManageService registerManageService;
+    @Autowired
+    private ConfigManageService configManageService;
+    @Autowired
+    private IMessageService messageService;
 
     @PostMapping(value = "registerApplication", produces = "application/json;charset=utf-8")
     public Result<Boolean> registerApplication(@RequestParam String systemId,
@@ -99,6 +106,19 @@ public class RpcRegisterManage {
             return new Result<>(ResponseCode.INDEX_DUP.getCode(), e.getMessage(), true);
         } catch (Exception e) {
             logger.error("注册应用接口失败 systemId：{}", systemId, e);
+            return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), false);
+        }
+    }
+
+    @PostMapping(value = "registerEvent", produces = "application/json;charset=utf-8")
+    public Result<Boolean> registerEvent(@RequestParam String systemId) {
+        try {
+            logger.info("应用信息注册完成通知 systemId：{}", systemId);
+            String gatewayId = configManageService.queryGatewayDistribution(systemId);
+            messageService.pushMessage(gatewayId, systemId);
+            return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), true);
+        }catch (Exception e) {
+            logger.error("应用信息注册完成通知失败 systemId：{}", systemId, e);
             return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), false);
         }
     }

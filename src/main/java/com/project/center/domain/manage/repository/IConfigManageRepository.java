@@ -20,4 +20,6 @@ public interface IConfigManageRepository {
     List<ApplicationInterfaceVO> queryApplicationInterfaceList(String systemId);
 
     List<ApplicationInterfaceMethodVO> queryApplicationInterfaceMethodList(String systemId, String interfaceId);
+
+    String queryGatewayDistribution(String systemId);
 }

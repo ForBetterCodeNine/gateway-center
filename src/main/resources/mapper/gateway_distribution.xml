@@ -14,6 +14,9 @@
     <select id="queryGatewayDistributionSystemList" resultType="java.lang.String">
         SELECT system_id FROM gateway_distribution
     </select>
+    <select id="queryGatewayDistribution" resultType="java.lang.String">
+        SELECT gateway_id FROM gateway_distribution WHERE system_id = #{systemId}
+    </select>
 
 
 </mapper>
