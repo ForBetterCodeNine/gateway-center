@@ -144,4 +144,23 @@ public class ConfigManageRepository implements IConfigManageRepository {
     public String queryGatewayDistribution(String systemId) {
         return gatewayDistributionDao.queryGatewayDistribution(systemId);
     }
+
+    @Override
+    public List<GatewayServerDetailVO> queryGatewayServerDetailList() {
+        List<GatewayServerDetail> gatewayServerDetails = gatewayServerDetailDao.queryGatewayServerDetailList();
+        List<GatewayServerDetailVO> gatewayServerDetailVOList = new ArrayList<>(gatewayServerDetails.size());
+        for (GatewayServerDetail gatewayServerDetail : gatewayServerDetails) {
+            GatewayServerDetailVO gatewayServerDetailVO = new GatewayServerDetailVO();
+            gatewayServerDetailVO.setId(gatewayServerDetail.getId());
+            gatewayServerDetailVO.setGroupId(gatewayServerDetail.getGroupId());
+            gatewayServerDetailVO.setGatewayId(gatewayServerDetail.getGatewayId());
+            gatewayServerDetailVO.setGatewayName(gatewayServerDetail.getGatewayName());
+            gatewayServerDetailVO.setGatewayAddress(gatewayServerDetail.getGatewayAddress());
+            gatewayServerDetailVO.setStatus(gatewayServerDetail.getStatus());
+            gatewayServerDetailVO.setCreateTime(gatewayServerDetail.getCreateTime());
+            gatewayServerDetailVO.setUpdateTime(gatewayServerDetail.getUpdateTime());
+            gatewayServerDetailVOList.add(gatewayServerDetailVO);
+        }
+        return gatewayServerDetailVOList;
+    }
 }

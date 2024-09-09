@@ -24,6 +24,11 @@
         FROM gateway_server_detail
         WHERE gateway_id = #{gatewayId} AND gateway_address = #{gatewayAddress}
     </select>
+    <select id="queryGatewayServerDetailList" resultMap="dataMap">
+        SELECT gateway_id, gateway_name, gateway_address, status
+        FROM gateway_server_detail
+        WHERE gateway_id = #{gatewayId} AND gateway_address = #{gatewayAddress}
+    </select>
 
     <update id="updateGatewayStatus" parameterType="com.project.center.infrastructure.po.GatewayServerDetail">
         UPDATE gateway_server_detail

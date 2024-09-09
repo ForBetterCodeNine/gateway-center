@@ -28,6 +28,11 @@ public class ConfigManageService implements IConfigManageService {
     }
 
     @Override
+    public List<GatewayServerDetailVO> queryGatewayServerDetailList() {
+        return configManageRepository.queryGatewayServerDetailList();
+    }
+
+    @Override
     public boolean registryGatewayServerNode(String groupId, String gatewayId, String gatewayName, String gatewayAddress) {
         GatewayServerDetailVO gatewayServerDetailVO = configManageRepository.queryGatewayServerDetail(gatewayId, gatewayAddress);
         if(gatewayServerDetailVO == null) {
